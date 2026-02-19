@@ -1,11 +1,3 @@
-void main() {
-    IO.println(countOddSum(0));
-    IO.println(countOddSum(5));
-    IO.println(countOddSum(-5));
-    IO.println(countOddSum(9));
-    IO.println(countOddSum(-10));
-}
-
 int countOddSum (int edge){
     int sum = 0;
     if (edge >= 0){       // if (edge > 0){
@@ -23,4 +15,12 @@ int countOddSum (int edge){
     }
     }
     return sum;
+}
+
+void main() {
+    IO.println(countOddSum(0));
+    IO.println(countOddSum(5));
+    IO.println(countOddSum(-5));
+    IO.println(countOddSum(9));
+    IO.println(countOddSum(-10));
 }
