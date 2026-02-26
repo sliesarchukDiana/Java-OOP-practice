@@ -1,3 +1,4 @@
+//Написати програму для визначення частоти кожного символу в рядку.
 void countQuantity(String message){
      char[] charArray = message.toCharArray();
      boolean[] counted = new boolean[message.length()];

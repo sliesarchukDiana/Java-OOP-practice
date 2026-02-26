@@ -1,3 +1,5 @@
+//Написати програму для друку назви місяця на основі введеного
+//користувачем числа (1-12)
 String convertValToMonth(int val){
     return switch (val) {
         case 1 -> ("January");

@@ -1,3 +1,4 @@
+//Написати програму для перевірки довжини пароля.
 String isLongEnough (String password){
     if (password.length()>=8){
         return ("Password is appropriate!");
