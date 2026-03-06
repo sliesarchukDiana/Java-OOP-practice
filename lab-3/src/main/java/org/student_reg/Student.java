@@ -32,4 +32,3 @@ public class Student {
          return Objects.hash(firstName, lastName, age, averageGrade);
     }
 }
-
