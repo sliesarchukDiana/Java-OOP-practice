@@ -29,5 +29,19 @@ public class MainGenerics {
         System.out.println("The max among integers is " + findMax(intArray));
         System.out.println("The max among doubles is " + findMax(doubleArray));
         System.out.println("The max among chars is " + findMax(charArray));
+
+        Pair <String, String> pair1 = new Pair<>("Hello", "World");
+        Pair <String, String> pair2 = new Pair<>("Hello", "World");
+        Pair <Integer, Double> pair3 = new Pair<>(2, 32.9);
+        Pair <Integer, Double> pair4 = new Pair<>(12, 12.4);
+        java.util.List<Integer> intList = java.util.Arrays.asList(10, 13, 34, 67);
+        Pair <String, java.util.List<Integer>> pair5 = new Pair<>("Integer", intList);
+        System.out.println(pair1);
+        System.out.println(pair3);
+        System.out.println(pair5);
+        System.out.println(pair1.comparePair(pair2));
+        System.out.println(pair3.comparePair(pair4));
+
+
     }
 }
