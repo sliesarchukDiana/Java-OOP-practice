@@ -11,7 +11,13 @@ public class MainShapes {
         return totalArea;
     }
 
-    public static void main (String[] args){
+    public static void addToList(List<? super Integer> list){
+        for (int i = 1; i < 10; i++){
+            list.add(i);
+        }
+    }
+
+    static void main(){
         List<Circle> circles = new ArrayList<>();
         circles.add(new Circle(5));
         circles.add(new Circle(3));
@@ -27,8 +33,18 @@ public class MainShapes {
 
         System.out.println("Total area of circles: " + calculateTotalArea(circles));
         System.out.println("Total area of rectangles: " + calculateTotalArea(rectangles));
-        System.out.println("Total area of mixed shapes: " + calculateTotalArea(mixedShapes));
+        System.out.println("Total area of mixed shapes: " + calculateTotalArea(mixedShapes) + "\n");
 
+        List<Integer> integers = new ArrayList<>();
+        addToList(integers);
+        System.out.println("Integer list: " + integers);
 
+        List<Number> numbers = new ArrayList<>();
+        addToList(numbers);
+        System.out.println(numbers);
+
+        List<Object> objects = new ArrayList<>();
+        addToList(objects);
+        System.out.println(objects);
     }
 }

@@ -1,7 +1,7 @@
 package org.wildcards;
 
 public class Rectangle extends Shape{
-    private double width, height;
+    private final double width, height;
 
     public Rectangle (double width, double height){
         this.width = width;
