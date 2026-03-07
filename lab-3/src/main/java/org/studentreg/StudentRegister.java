@@ -1,8 +1,8 @@
-package org.student_reg;
+package org.studentreg;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Student_register {
+public class StudentRegister {
         Map<Integer, Student> students = new HashMap<>();
         int idCounter = 1;
 

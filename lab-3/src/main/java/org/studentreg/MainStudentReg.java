@@ -1,7 +1,7 @@
-package org.student_reg;
+package org.studentreg;
 import java.util.*;
 
-public class Main_task_1_2 {
+public class MainStudentReg {
 
     public static <T> Set<T> getUniqueElements (List<T> list){
         return new HashSet<>(list);
@@ -16,7 +16,7 @@ public class Main_task_1_2 {
     }
 
         static void main() {
-            Student_register registry = new Student_register();
+            StudentRegister registry = new StudentRegister();
 
             Student s1 = new Student("Bob", "Smith", 20, 4.5f);
             Student s2 = new Student("Bella", "Swan", 17, 4.9f);

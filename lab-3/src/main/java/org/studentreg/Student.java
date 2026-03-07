@@ -1,4 +1,4 @@
-package org.student_reg;
+package org.studentreg;
 import java.util.Objects;
 
 public class Student {
