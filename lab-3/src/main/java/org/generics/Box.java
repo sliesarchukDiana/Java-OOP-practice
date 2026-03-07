@@ -8,7 +8,7 @@ public class Box<T> {
         this.item =  item;
     }
 
-    public T getItem(T item){
+    public T getItem(){
         return item;
     }
 }
