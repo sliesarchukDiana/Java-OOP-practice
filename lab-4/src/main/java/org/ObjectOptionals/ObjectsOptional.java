@@ -40,8 +40,10 @@ public class ObjectsOptional {
         }
 
         public static Optional<String> secondMostExpensiveProduct(List<Product> products) {
-            return products.stream().sorted(Comparator.comparingDouble(Product::price)
-                    .reversed()).skip(1)
+            return products.stream()
+                    .sorted(Comparator.comparingDouble(Product::price)
+                    .reversed())
+                    .skip(1)
                     .map(Product::name).findFirst();
         }
 
