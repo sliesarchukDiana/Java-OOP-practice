@@ -9,10 +9,10 @@ This repository contains a collection of Java-based microprograms created for pr
 ## 📂 Repository Structure
 The repository is organized by laboratory assignments, each focusing on specific Java features and programming logic:
 
-* 📁 `lab-1/` - **Fundamental Logic:** A series of microprograms focusing on basic operations, including array manipulation, sorting algorithms, and password validation checks.
-* 📁 `lab-2/` - **String Processing:** Tasks focused on string manipulation and validation, specifically building logic for valid URL filtration.
-* 📁 `lab-3/` - **OOP Principles:** Implementation of core object-oriented concepts like inheritance and polymorphism, featuring class hierarchies (e.g., an `Animal` base class extended by `Cat`, etc.).
-
+* 📁 `lab-1/` - **Fundamental Logic:** Basic operations, including array manipulation, sorting algorithms, and password validation checks.
+* 📁 `lab-2/` - **String Processing:** string manipulation and validation, specifically building logic for valid URL filtration.
+* 📁 `lab-3/` - **OOP Principles:**  Inheritance and polymorphism, featuring class hierarchies.
+* 📁 `lab-4/` - **OOP Principles:** Streams and Lambda expressions using optionals for avoiding NullPointerExceptions.
 ## 🚀 How to Run Locally
 These programs are standard console applications. You can run them using your preferred IDE or via the command line.
 
