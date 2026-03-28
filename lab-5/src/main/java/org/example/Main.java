@@ -1,12 +1,23 @@
 package org.example;
-import lombok.Data;
-import lombok.extern.log4j.Log4j2;
 
-@Data
-@Log4j2
+import dao.PersonDao;
+import entity.Person;
+import java.util.List;
+
 public class Main {
     static void main() {
-        log.info("Hello!!!");
-        log.error("This is an error!");
+        System.out.println("🚀 Запуск програми...");
+        PersonDao personDao = new PersonDao();
+        List<Person> people = personDao.getAllPersons();
+        System.out.println("✅ Знайдено користувачів у базі: " + people.size());
+        System.out.println("--------------------------------------------------");
+
+        for (Person p : people) {
+            System.out.println("ID: " + p.getIdPerson() +
+                    " | Ім'я: " + p.getFirstName() + " " + p.getLastName() +
+                    " | Email: " + p.getEmail());
+        }
+
+        System.out.println("--------------------------------------------------");
     }
 }
