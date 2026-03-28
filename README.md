@@ -26,3 +26,5 @@ These programs are standard console applications. You can run them using your pr
 
 ## 👤 Author
 Diana (@sliesarchukDiana)
+If you want to buy me a coffee ☕ 
+Mono: 4441111042237226
