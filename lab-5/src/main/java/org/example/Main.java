@@ -17,7 +17,6 @@ public class Main {
         System.out.println("Total Materials available: " + materialDao.getAllMaterials().size());
         System.out.println("Total Catalogue Sections: " + sectionDao.getAllSections().size());
         System.out.println("Total Keywords in system: " + keywordDao.getAllKeywords().size());
-        System.out.println("-------------------------------------------------------\n");
 
         personDao.searchPersonsWithMetadata("thekidslover");
         personDao.searchPersonsWithMetadata("Стівен");
@@ -25,13 +24,13 @@ public class Main {
         System.out.println("\nCRUD");
         System.out.println("CREATE: Adding a new tag...");
         Keyword testKeyword = new Keyword();
-        testKeyword.setWord("Java для чайників");
+        testKeyword.setWord("C sharp");
         keywordDao.createKeyword(testKeyword);
         System.out.println("READ: Finding the tag...");
         List<Keyword> allKeywords = keywordDao.getAllKeywords();
         Keyword foundKeyword = null;
         for (Keyword k : allKeywords) {
-            if (k.getWord().equals("Java для чайників")) {
+            if (k.getWord().isEmpty()) {
                 foundKeyword = k;
                 System.out.println("Tag found in DB! Assigned ID: " + k.getIdKeyword());
                 break;
@@ -39,12 +38,12 @@ public class Main {
         }
         if (foundKeyword != null) {
             System.out.println("3. UPDATE: Changing the tag name...");
-            foundKeyword.setWord("Java для початківців");
+            foundKeyword.setWord("C#");
             keywordDao.updateKeyword(foundKeyword);
             System.out.println("Tag updated to: " + foundKeyword.getWord());
 
             System.out.println("4. DELETE: Cleaning up the database...");
-//            keywordDao.deleteKeyword(foundKeyword.getIdKeyword());
+            keywordDao.deleteKeyword(foundKeyword.getIdKeyword());
             System.out.println("Temporary tag deleted successfully.");
         }
     }

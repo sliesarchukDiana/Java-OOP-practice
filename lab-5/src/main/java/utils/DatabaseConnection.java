@@ -4,31 +4,74 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 @Log4j2
 public class DatabaseConnection {
-    private static final Properties properties = new Properties();
-    private static final String URL;
-    private static final String USER;
-    private static final String PASSWORD;
+    private static DatabaseConnection instance;
 
-    static {
+    private final String url;
+    private final String user;
+    private final String password;
+    private final List<Connection> connectionPool;
+    private final int MAX_CONNECTIONS = 10;
+
+    private DatabaseConnection() {
+        Properties properties = new Properties();
         try (InputStream is = DatabaseConnection.class.getClassLoader().getResourceAsStream("database.properties")) {
             properties.load(is);
-            URL = properties.getProperty("db.url");
-            USER = properties.getProperty("db.user");
-            PASSWORD = properties.getProperty("db.password");
+            this.url = properties.getProperty("db.url");
+            this.user = properties.getProperty("db.user");
+            this.password = properties.getProperty("db.password");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            log.info("DB config was downloaded.");
+
+            this.connectionPool = new ArrayList<>(MAX_CONNECTIONS);
+            initializeConnectionPool();
+
+            log.info("DB config downloaded and Connection Pool initialized.");
         } catch (Exception e) {
-            log.error("DB configuration error!", e);
+            log.error("DB configuration or Pool initialization error!", e);
             throw new RuntimeException(e);
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        log.debug("Connecting to the Database...");
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static synchronized DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    private void initializeConnectionPool() throws SQLException {
+        for (int i = 0; i < MAX_CONNECTIONS; i++) {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            connectionPool.add(connection);
+        }
+    }
+
+    public synchronized Connection getConnection() {
+        if (connectionPool.isEmpty()) {
+            throw new RuntimeException("No available connections in the pool");
+        }
+
+        Connection connection = connectionPool.removeLast();
+
+        try {
+            if (connection.isClosed() || !connection.isValid(5)) {
+                connection = DriverManager.getConnection(url, user, password);
+            }
+        } catch (SQLException e) {
+            log.error("Error getting a connection from the pool", e);
+            throw new RuntimeException(e);
+        }
+        return connection;
+    }
+
+    public synchronized void releaseConnection(Connection connection) {
+        if (connection != null) {
+            connectionPool.add(connection);
+        }
     }
 }
