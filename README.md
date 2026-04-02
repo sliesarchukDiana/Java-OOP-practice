@@ -13,6 +13,8 @@ The repository is organized by laboratory assignments, each focusing on specific
 * 📁 `lab-2/` - **String Processing:** string manipulation and validation, specifically building logic for valid URL filtration.
 * 📁 `lab-3/` - **OOP Principles:**  Inheritance and polymorphism, featuring class hierarchies.
 * 📁 `lab-4/` - **OOP Principles:** Streams and Lambda expressions using optionals for avoiding NullPointerExceptions.
+* 📁 `lab-4/` - Java Database Connectivity:** PreparedStatement and ResultSetMetadata, DB connectivity configuration, DAO and DTO objects.
+
 ## 🚀 How to Run Locally
 These programs are standard console applications. You can run them using your preferred IDE or via the command line.
 
