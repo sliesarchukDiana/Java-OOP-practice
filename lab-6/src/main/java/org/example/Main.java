@@ -1,17 +1,37 @@
 package org.example;
+import org.example.entity.Client;
+import org.example.entity.Restaurant;
+import org.example.entity.Waiter;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println("Hello and welcome!");
+        Restaurant restaurant = new Restaurant();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+        Thread waiter1 = new Thread(new Waiter("Офіціант 1", restaurant));
+        Thread waiter2 = new Thread(new Waiter("Офіціант 2", restaurant));
+
+        waiter1.start();
+        waiter2.start();
+
+        Thread[] clients = new Thread[5];
+        clients[0] = new Thread(new Client("Роберт", restaurant));
+        for (int i = 1; i < 5; i++) {
+            clients[i] = new Thread(new Client("Клієнт " + i, restaurant));
         }
+
+        for (Thread client : clients) {
+            client.start();
+        }
+
+        for (Thread client : clients) {
+            try {
+                client.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+        waiter1.interrupt();
+        waiter2.interrupt();
     }
 }
