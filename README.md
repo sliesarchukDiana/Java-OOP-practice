@@ -5,16 +5,22 @@ This repository contains a collection of Java-based microprograms created for pr
 
 ## 🛠️ Technologies Used
 * **Java:** Core language syntax, data structures, and object-oriented principles.
+* **Maven:** Build automation and project management tool for Java
+* **Log4J:** Java-based logging framework maintained by the Apache Software Foundation
+* **Lombok:** Java library designed to reduce boilerplate code and enhance productivity.
+* **Spring:** Lightweight Java framework used to build scalable, maintainable enterprise applications
 
 ## 📂 Repository Structure
 The repository is organized by laboratory assignments, each focusing on specific Java features and programming logic:
 
+* 📁 `DB_Java/` - **MongoDB connectivity (noSQL):**  Interaction with noSQL DB through plain Java.
 * 📁 `lab-1/` - **Fundamental Logic:** Basic operations, including array manipulation, sorting algorithms, and password validation checks.
 * 📁 `lab-2/` - **String Processing:** string manipulation and validation, specifically building logic for valid URL filtration.
 * 📁 `lab-3/` - **OOP Principles:**  Inheritance and polymorphism, featuring class hierarchies.
 * 📁 `lab-4/` - **OOP Principles:** Streams and Lambda expressions using optionals for avoiding NullPointerExceptions.
-* 📁 `lab-5/` - **Java Database Connectivity:** PreparedStatement and ResultSetMetadata, DB connectivity configuration, DAO and DTO objects.
-* 📁 `lab-6/` - **Concurrency**: THread manipulations, lock and interruption mechanisms for synchronizing thread to avaid Data Races/Race conditions.
+* 📁 `lab-5/` - **JDBC (MySQL):** PreparedStatement and ResultSetMetadata, DB connectivity configuration, DAO and DTO objects.
+* 📁 `lab-6/` - **Concurrency**: Thread manipulations, lock and interruption mechanisms for synchronizing thread to avaid Data Races/Race conditions.
+* 📁 `lab-7/` - **Spring Boot REST API:** simple Web application with implemented CRUD operations for HTTP methods using Spring and Spring Boot.
 
 ## 🚀 How to Run Locally
 These programs are standard console applications. You can run them using your preferred IDE or via the command line.
@@ -29,5 +35,3 @@ These programs are standard console applications. You can run them using your pr
 
 ## 👤 Author
 Diana (@sliesarchukDiana)
-If you want to buy me a coffee ☕ 
-Mono: 4441111042237226
