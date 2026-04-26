@@ -1,0 +1,13 @@
+package com.example.lab_7.model;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MaterialKeyword {
+    private int idMaterial;
+    private int idKeyword;
+}
