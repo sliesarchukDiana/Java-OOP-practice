@@ -151,7 +151,7 @@ public class Main {
             )).forEach(doc -> System.out.println(doc.toJson()));
 
         } catch (Exception e) {
-            System.err.println("Помилка підключення: " + e.getMessage());
+            System.err.println("Connection error: " + e.getMessage());
         }
     }
 }
