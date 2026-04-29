@@ -8,6 +8,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
-    private int idPerson;
+    private Integer idClient;
+    private String firstName;
+    private String lastName;
+    private String email;
     private LocalDate regDate;
 }
