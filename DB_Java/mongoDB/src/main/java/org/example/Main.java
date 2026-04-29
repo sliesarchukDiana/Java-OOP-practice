@@ -25,14 +25,12 @@ public class Main {
             MongoCollection<Document> usersCollection = database.getCollection("users");
             System.out.println("Connected to DB!");
 
-// 1. Вивід матеріалів дорожче ніж 200
 // db.materials.find({ cost: { $gt: 200 } }).pretty()
             System.out.println("\n 1. Materials with cost > 200");
             for (Document doc : materialsCollection.find(Filters.gt("cost", 200))) {
                 System.out.println(doc.toJson());
             }
 
-// 2. Юзери Eric або Riley
 // db.users.find({ $or: [ {first_name: "Eric"}, {first_name: "Riley"} ] })
             System.out.println("\n 2. Users named Eric or Riley ");
             Bson nameFilter = Filters.or(
@@ -43,7 +41,6 @@ public class Main {
                 System.out.println(doc.toJson());
             }
 
-// 3. Вибирає тільки назву і ціну, ховає ID, сортує за спаданням ціни, виводить 3
 // db.materials.find({}, {title: 1, cost: 1, _id: 0}).sort({cost: -1}).limit(3)
             System.out.println("\n 3. Тоp-3 most expensive materials ");
             Bson projection = Projections.fields(
@@ -58,14 +55,12 @@ public class Main {
                 System.out.println(doc.toJson());
             }
 
-// 4. Шукає по вкладеному масиву ключових слів
 // db.materials.find({ keywords: "Algorithms" })
             System.out.println("\n 4. Materials with keyword 'Algorithms' ");
             for (Document doc : materialsCollection.find(Filters.eq("keywords", "Algorithms"))) {
                 System.out.println(doc.toJson());
             }
 
-// 5. Інсерт нового тестового елемента
 // db.materials.insert({ _id: 999, title: "Test Material for Deletion", cost: 0 })
             System.out.println("\n 5. Insert test material");
             Document newMaterial = new Document("_id", 999)
@@ -75,13 +70,12 @@ public class Main {
             materialsCollection.insertOne(newMaterial);
             System.out.println("Element was inserted");
 
-// 6. Видалення тестового елемента
 // db.materials.deleteOne({ _id: 999 })
             System.out.println("\n 6. Delete test material ");
             materialsCollection.deleteOne(Filters.eq("_id", 999));
             System.out.println("Element was deleted!");
 
-// Агрегація 1: Lookup з sections, фільтрація, групування та пуш назв
+
             System.out.println("\nТоp-3 sections by overall courses price");
             materialsCollection.aggregate(Arrays.asList(
                     Aggregates.lookup("sections", "section_id", "_id", "section_info"),
@@ -94,7 +88,7 @@ public class Main {
                     Aggregates.limit(3)
             )).forEach(doc -> System.out.println(doc.toJson()));
 
-// Агрегація 2: Unwind ключових слів, середня ціна та кількість
+
             System.out.println("\nStatistics by keywords");
             materialsCollection.aggregate(Arrays.asList(
                     Aggregates.unwind("$keywords"),
@@ -106,7 +100,7 @@ public class Main {
                     Aggregates.limit(4)
             )).forEach(doc -> System.out.println(doc.toJson()));
 
-// Агрегація 3: Користувачі та їхні підписки
+
             System.out.println("\nStatistics subscription format");
             usersCollection.aggregate(Arrays.asList(
                     Aggregates.match(Filters.and(
@@ -121,7 +115,7 @@ public class Main {
                     Aggregates.sort(Sorts.descending("subs_count"))
             )).forEach(doc -> System.out.println(doc.toJson()));
 
-// Агрегація 4: Статистика за авторами
+
             System.out.println("\nТоp-3 authors by amount of their materials");
             materialsCollection.aggregate(Arrays.asList(
                     Aggregates.unwind("$author_ids"),
@@ -133,7 +127,7 @@ public class Main {
                     Aggregates.limit(3)
             )).forEach(doc -> System.out.println(doc.toJson()));
 
-// Агрегація 5: Групування за section_id та проєкція (перейменування полів)
+            
             System.out.println("\nRevenue and Minimal Price by sections ");
             materialsCollection.aggregate(Arrays.asList(
                     Aggregates.match(Filters.gte("cost", 100)),
