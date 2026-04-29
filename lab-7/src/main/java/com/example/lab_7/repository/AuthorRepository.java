@@ -25,10 +25,10 @@ public class AuthorRepository {
     }
 
     public Author save(Author author) {
-        if (author.getIdPerson() == null) {
-            author.setIdPerson(currentId.getAndIncrement());
+        if (author.getIdAuthor() == null) {
+            author.setIdAuthor(currentId.getAndIncrement());
         }
-        storage.put(author.getIdPerson(), author);
+        storage.put(author.getIdAuthor(), author);
         return author;
     }
 
