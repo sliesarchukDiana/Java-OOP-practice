@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Subscription {
-    private int idSubscription;
-    private int formatType;
-    private int idClient;
-    private int idSection;
-    private int idKeyword;
+    private Integer idSubscription;
+    private Integer formatType;
+    private Integer idClient;
+    private Integer idSection;
+    private Integer idKeyword;
 }
