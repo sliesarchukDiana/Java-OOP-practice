@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Keyword {
-   private int idKeyword;
+   private Integer idKeyword;
    private String word;
 }
