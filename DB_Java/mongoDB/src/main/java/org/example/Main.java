@@ -127,7 +127,7 @@ public class Main {
                     Aggregates.limit(3)
             )).forEach(doc -> System.out.println(doc.toJson()));
 
-            
+
             System.out.println("\nRevenue and Minimal Price by sections ");
             materialsCollection.aggregate(Arrays.asList(
                     Aggregates.match(Filters.gte("cost", 100)),

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -19,32 +20,39 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author getAuthorById(int id) {
+    public Optional<Author> getAuthorById(int id) {
         return authorRepository.findById(id);
     }
 
     public Author createAuthor(Author author) {
-        log.info("Creating new author...");
+        log.info("Creating new author: {} {}", author.getFirstName(), author.getLastName());
         return authorRepository.save(author);
     }
 
-    public Author updateAuthor(int id, Author authorDetails) {
-        authorDetails.setIdPerson(id);
+    public Optional<Author> updateAuthor(int id, Author authorDetails) {
         log.info("Updating author with id {}", id);
-        return authorRepository.save(authorDetails);
-    }
-
-    public Author updateAuthorBio(int id, String newBio) {
-        Author existingAuthor = authorRepository.findById(id);
-        if (existingAuthor != null) {
-            existingAuthor.setBio(newBio);
+        return authorRepository.findById(id).map(existingAuthor -> {
+            existingAuthor.setFirstName(authorDetails.getFirstName());
+            existingAuthor.setLastName(authorDetails.getLastName());
+            existingAuthor.setEmail(authorDetails.getEmail());
+            existingAuthor.setBio(existingAuthor.getBio());
             return authorRepository.save(existingAuthor);
-        }
-        return null;
+        });
     }
 
-    public void deleteAuthor(int id) {
+    public Optional<Author> patchAuthor (int id, Author authorDetails){
+        log.info("Patching author with id {}", id);
+        return authorRepository.findById(id).map(existingAuthor -> {
+            if (authorDetails.getFirstName() != null) existingAuthor.setFirstName(authorDetails.getFirstName());
+            if (authorDetails.getLastName() != null) existingAuthor.setLastName(authorDetails.getLastName());
+            if (authorDetails.getEmail() != null) existingAuthor.setEmail(authorDetails.getEmail());
+            if (authorDetails.getBio() != null) existingAuthor.setBio(authorDetails.getBio());
+            return authorRepository.save(existingAuthor);
+        });
+    }
+
+    public boolean deleteAuthor(int id) {
         log.info("Deleting author with id {}", id);
-        authorRepository.deleteById(id);
+        return authorRepository.deleteById(id);
     }
 }
