@@ -12,4 +12,8 @@ public interface CatalogueSectionMapper {
     @Mapping(source = "parent.idSection", target = "parentId")
     CatalogueSectionDto toDto(CatalogueSection section);
 
+    @Mapping(source = "id", target = "idSection")
+    @Mapping(target = "parent", ignore = true)
+    @Mapping(target = "subSections", ignore = true)
+    CatalogueSection toEntity(CatalogueSectionDto dto);
 }
