@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="06-05-2026-001" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="Person"/>
+            </not>
+        </preConditions>
+        <createTable tableName="Person">
+            <column name="id_Person" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="06-05-2026-002" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="Author"/>
+            </not>
+        </preConditions>
+        <createTable tableName="Author">
+            <column name="id_person" type="INT">
+                <constraints primaryKey="true" nullable="false"
+                             referencedTableName="Person" referencedColumnNames="id_Person"
+                             foreignKeyName="fk_author_person"/>
+            </column>
+            <column name="bio" type="TEXT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
