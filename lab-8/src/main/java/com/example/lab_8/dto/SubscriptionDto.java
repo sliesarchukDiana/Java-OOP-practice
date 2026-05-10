@@ -7,10 +7,10 @@ import lombok.Data;
 public class SubscriptionDto {
     private Integer id;
 
-    @NotNull(message = "Format type is necessary")
+    @NotNull(message = "Format type is necessary!")
     private Integer formatType;
 
-    @NotNull(message = "Client's ID is required")
+    @NotNull(message = "CLient's ID is required!")
     private Integer clientId;
 
     private Integer sectionId;
