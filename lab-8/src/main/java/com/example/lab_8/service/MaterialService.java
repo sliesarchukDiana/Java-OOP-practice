@@ -5,7 +5,10 @@ import com.example.lab_8.mapper.MaterialMapper;
 import com.example.lab_8.model.Material;
 import com.example.lab_8.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
@@ -27,7 +30,33 @@ public class MaterialService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
+    public List<MaterialDto> getAllMaterialsWithNPlusOne() {
+        List<Material> materials = materialRepository.findAll();
+        for (Material material : materials) {
+            material.getAuthors().size();
+            material.getKeywords().size();
+        }
+        return materials.stream()
+                .map(materialMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MaterialDto> getAllMaterialsFixed() {
+        List<Material> materials = materialRepository.findAllWithAuthors();
+        return materials.stream()
+                .map(materialMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MaterialDto> getMaterialsPaginated(Pageable pageable) {
+        Page<Material> materialPage = materialRepository.findAll(pageable);
+        return materialPage.map(materialMapper::toDto);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public MaterialDto createMaterial(MaterialDto dto) {
         Material material = materialMapper.toEntity(dto);
 
