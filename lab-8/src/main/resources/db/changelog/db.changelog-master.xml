@@ -6,33 +6,19 @@
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="06-05-2026-001" author="Diana Sliesarchuk">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="Person"/>
-            </not>
-        </preConditions>
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Person"/></not></preConditions>
         <createTable tableName="Person">
             <column name="id_Person" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="first_name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_name" type="VARCHAR(45)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="VARCHAR(100)">
-                <constraints unique="true" nullable="false"/>
-            </column>
+            <column name="first_name" type="VARCHAR(100)"><constraints nullable="false"/></column>
+            <column name="last_name" type="VARCHAR(45)"><constraints nullable="false"/></column>
+            <column name="email" type="VARCHAR(100)"><constraints unique="true" nullable="false"/></column>
         </createTable>
     </changeSet>
 
     <changeSet id="06-05-2026-002" author="Diana Sliesarchuk">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="Author"/>
-            </not>
-        </preConditions>
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Author"/></not></preConditions>
         <createTable tableName="Author">
             <column name="id_person" type="INT">
                 <constraints primaryKey="true" nullable="false"
@@ -42,4 +28,80 @@
             <column name="bio" type="TEXT"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="13-05-2026-003" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Catalogue_section"/></not></preConditions>
+        <createTable tableName="Catalogue_section">
+            <column name="id_section" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)"><constraints nullable="false"/></column>
+            <column name="parent_id" type="INT">
+                <constraints referencedTableName="Catalogue_section" referencedColumnNames="id_section"
+                             foreignKeyName="fk_section_parent"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="13-05-2026-004" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Keyword"/></not></preConditions>
+        <createTable tableName="Keyword">
+            <column name="id_keyword" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="word" type="VARCHAR(100)"><constraints nullable="false" unique="true"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="13-05-2026-005" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Material"/></not></preConditions>
+        <createTable tableName="Material">
+            <column name="id_material" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"><constraints nullable="false"/></column>
+            <column name="annotation" type="VARCHAR(500)"/>
+            <column name="body_text" type="TEXT"/>
+            <column name="cost" type="DECIMAL(19,2)"/>
+            <column name="id_section" type="INT">
+                <constraints referencedTableName="Catalogue_section" referencedColumnNames="id_section"
+                             foreignKeyName="fk_material_section"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="13-05-2026-006" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Author-Material"/></not></preConditions>
+        <createTable tableName="Author-Material">
+            <column name="id_material" type="INT">
+                <constraints nullable="false"
+                             referencedTableName="Material" referencedColumnNames="id_material"
+                             foreignKeyName="fk_am_material"/>
+            </column>
+            <column name="id_author" type="INT">
+                <constraints nullable="false"
+                             referencedTableName="Author" referencedColumnNames="id_person"
+                             foreignKeyName="fk_am_author"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="13-05-2026-007" author="Diana Sliesarchuk">
+        <preConditions onFail="MARK_RAN"><not><tableExists tableName="Material-Keyword"/></not></preConditions>
+        <createTable tableName="Material-Keyword">
+            <column name="id_material" type="INT">
+                <constraints nullable="false"
+                             referencedTableName="Material" referencedColumnNames="id_material"
+                             foreignKeyName="fk_mk_material"/>
+            </column>
+            <column name="id_keyword" type="INT">
+                <constraints nullable="false"
+                             referencedTableName="Keyword" referencedColumnNames="id_keyword"
+                             foreignKeyName="fk_mk_keyword"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <include file="db/changelog/db.changelog-seed.xml"/>
+
 </databaseChangeLog>

@@ -10,7 +10,7 @@ public class SubscriptionDto {
     @NotNull(message = "Format type is necessary!")
     private Integer formatType;
 
-    @NotNull(message = "CLient's ID is required!")
+    @NotNull(message = "Client's ID is required!")
     private Integer clientId;
 
     private Integer sectionId;

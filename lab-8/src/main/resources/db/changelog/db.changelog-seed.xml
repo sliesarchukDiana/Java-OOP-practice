@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="13-05-2026-002" author="Diana Sliesarchuk">
+        <sql>
+            INSERT INTO Catalogue_section (id_section, name) VALUES
+            (91, 'Technology and Computing'),
+            (92, 'General Science'),
+            (93, 'Modern History');
+
+            INSERT INTO Keyword (id_keyword, word) VALUES
+            (91, 'internet'), (92, 'software'), (93, 'research'), (94, 'global');
+
+            INSERT INTO Person (id_Person, first_name, last_name, email) VALUES
+            (91, 'Alex', 'Taylor', 'alex@example.com'),
+            (92, 'Jordan', 'Casey', 'jordan@example.com'),
+            (93, 'Morgan', 'Smith', 'morgan@example.com');
+
+            INSERT INTO Author (id_person, bio) VALUES
+            (91, 'Technical writer for digital digests.'),
+            (92, 'Science researcher.'),
+            (93, 'History content contributor.');
+
+            INSERT INTO Material (id_material, title, annotation, body_text, cost, id_section) VALUES
+            (91, 'Evolution of the Web', 'Internet history.', 'Detailed text about HTTP and cloud...', 0.00, 1),
+            (92, 'Cloud Computing', 'Key concepts.', 'Explanation of SaaS and PaaS...', 0.00, 1),
+            (93, 'Renewable Energy', 'Global trends.', 'Analysis of solar and wind power...', 0.00, 2),
+            (94, 'Industrial Revolution', '19th-century shift.', 'Mechanization and social impact...', 0.00, 3);
+
+            INSERT INTO `Author-Material` (id_material, id_author) VALUES (91, 91), (92, 91), (93, 92), (94, 93);
+
+            INSERT INTO `Material-Keyword` (id_material, id_keyword) VALUES (91, 91), (91, 92), (92, 91), (93, 93), (94, 94);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
