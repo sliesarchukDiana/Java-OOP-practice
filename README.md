@@ -5,10 +5,13 @@ This repository contains a collection of Java-based microprograms created for pr
 
 ## 🛠️ Technologies Used
 * **Java:** Core language syntax, data structures, and object-oriented principles.
-* **Maven:** Build automation and project management tool for Java
-* **Log4J:** Java-based logging framework maintained by the Apache Software Foundation
+* **Maven:** Build automation and project management tool for Java.
+* **Log4J:** Java-based logging framework maintained by the Apache Software Foundation.
 * **Lombok:** Java library designed to reduce boilerplate code and enhance productivity.
-* **Spring:** Lightweight Java framework used to build scalable, maintainable enterprise applications
+* **Spring:** Lightweight framework used to build scalable, maintainable enterprise applications.
+* **SpringBoot:** framework used to build stand-alone, production-grade applications with minimal manual configuration.
+* **Hibernate:** Object-Relational Mapping (ORM) framework.
+* **Jakarta Persistance API (JPA):** specification that provides a standard way to manage relational data in Java applications.
 
 ## 📂 Repository Structure
 The repository is organized by laboratory assignments, each focusing on specific Java features and programming logic:
@@ -20,7 +23,9 @@ The repository is organized by laboratory assignments, each focusing on specific
 * 📁 `lab-4/` - **OOP Principles:** Streams and Lambda expressions using optionals for avoiding NullPointerExceptions.
 * 📁 `lab-5/` - **JDBC (MySQL):** PreparedStatement and ResultSetMetadata, DB connectivity configuration, DAO and DTO objects.
 * 📁 `lab-6/` - **Concurrency**: Thread manipulations, lock and interruption mechanisms for synchronizing thread to avaid Data Races/Race conditions.
-* 📁 `lab-7/` - **Spring Boot REST API:** simple Web application with implemented CRUD operations for HTTP methods using Spring and Spring Boot.
+* 📁 `lab-7/` - **Spring Boot REST API:** Simple Web application with implemented CRUD operations for HTTP methods using Spring and Spring Boot.
+* 📁 `lab-8/` - **Spring Boot REST API.Spring Data (prt-1):** Liqubase, Hibernate, Validation (DTO validators), JPA/JDBC Templates in Spring Boot application.
+* 📁 `lab-9/` - **Spring Boot REST API. Spring Data (prt-2):** Transactional annotation, Hibernate N+1 problem demonstration and solution (Query annotation), pagination of results. 
 
 ## 🚀 How to Run Locally
 These programs are standard console applications. You can run them using your preferred IDE or via the command line.
