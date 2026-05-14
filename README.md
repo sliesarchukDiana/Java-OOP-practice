@@ -25,7 +25,7 @@ The repository is organized by laboratory assignments, each focusing on specific
 * 📁 `lab-6/` - **Concurrency**: Thread manipulations, lock and interruption mechanisms for synchronizing thread to avaid Data Races/Race conditions.
 * 📁 `lab-7/` - **Spring Boot REST API:** Simple Web application with implemented CRUD operations for HTTP methods using Spring and Spring Boot.
 * 📁 `lab-8/` - **Spring Boot REST API.Spring Data (prt-1):** Liqubase, Hibernate, Validation (DTO validators), JPA/JDBC Templates in Spring Boot application.
-* 📁 `lab-9/` - **Spring Boot REST API. Spring Data (prt-2):** Transactional annotation, Hibernate N+1 problem demonstration and solution (Query annotation), pagination of results. 
+* 📁 `lab-8/` - **Spring Boot REST API. Spring Data (prt-2):** Transactional annotation, Hibernate N+1 problem demonstration and solution (Query annotation), pagination of results. 
 
 ## 🚀 How to Run Locally
 These programs are standard console applications. You can run them using your preferred IDE or via the command line.
