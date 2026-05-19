@@ -1,7 +1,7 @@
 # Java-OOP-practice ☕
 
 ## 📌 Overview
-This repository contains a collection of Java-based microprograms created for practicing core Object-Oriented Programming (OOP) concepts and fundamental logic. 
+This repository contains a collection of Java-based microprograms created for practicing with different Java libraries, dependencies, DB drivers and frameworks to build scalable and reliable backend and Spring based REST API.
 
 ## 🛠️ Technologies Used
 * **Java:** Core language syntax, data structures, and object-oriented principles.
