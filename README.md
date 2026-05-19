@@ -5,18 +5,22 @@ This repository contains a collection of Java-based microprograms created for pr
 
 ## 🛠️ Technologies Used
 * **Java:** Core language syntax, data structures, and object-oriented principles.
-* **Maven:** Build automation and project management tool for Java.
-* **Log4J:** Java-based logging framework maintained by the Apache Software Foundation.
-* **Lombok:** Java library designed to reduce boilerplate code and enhance productivity.
+* **Maven:** Build automation and project management tool.
+* **Log4J:** Logging framework maintained by the Apache Software Foundation.
+* **Lombok:** Library designed to reduce boilerplate code and enhance productivity.
 * **Spring:** Lightweight framework used to build scalable, maintainable enterprise applications.
-* **SpringBoot:** framework used to build stand-alone, production-grade applications with minimal manual configuration.
+* **SpringBoot:** Framework used to build stand-alone, production-grade applications with minimal manual configuration.
 * **Hibernate:** Object-Relational Mapping (ORM) framework.
 * **Jakarta Persistance API (JPA):** specification that provides a standard way to manage relational data in Java applications.
+* **MongoDB, Neo4J, RedisCli:** noSQL Database engines.
+* **mySQL:** SQL Database engine.
 
 ## 📂 Repository Structure
 The repository is organized by laboratory assignments, each focusing on specific Java features and programming logic:
 
-* 📁 `DB_Java/` - **MongoDB connectivity (noSQL):**  Interaction with noSQL DB through plain Java.
+* 📁 `DB_Java/mongoDB/` - **MongoDB connectivity (noSQL):** Data manipulation (CRUD operations) based on MongoDB database using Java.
+* 📁 `DB_Java/Neo4j/` - **Neo4J connectivity (noSQL):** Data manipulation (CRUD operations) based on Neo4J database using Java.
+* 📁 `DB_Java/RedisCLi/` - **RedisCli connectivity (noSQL):** Data manipulation (CRUD operations) based on RedisCli database using Java.
 * 📁 `lab-1/` - **Fundamental Logic:** Basic operations, including array manipulation, sorting algorithms, and password validation checks.
 * 📁 `lab-2/` - **String Processing:** string manipulation and validation, specifically building logic for valid URL filtration.
 * 📁 `lab-3/` - **OOP Principles:**  Inheritance and polymorphism, featuring class hierarchies.
