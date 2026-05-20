@@ -2,6 +2,7 @@ package com.example.lab_8.controller;
 
 import com.example.lab_8.dto.MaterialDto;
 import com.example.lab_8.service.MaterialService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,7 +46,7 @@ public class MaterialController {
     }
 
     @PostMapping
-    public ResponseEntity<MaterialDto> createMaterial(@RequestBody MaterialDto materialDto) {
+    public ResponseEntity<MaterialDto> createMaterial(@Valid @RequestBody MaterialDto materialDto) {
         return ResponseEntity.ok(materialService.createMaterial(materialDto));
     }
 

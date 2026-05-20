@@ -32,7 +32,7 @@ public class Material {
     @Column(name = "body_text", columnDefinition = "TEXT")
     private String bodyText;
 
-    @PositiveOrZero(message = "Are u stupid?")
+    @PositiveOrZero(message = "Cost must be positive number")
     @Column(name = "cost")
     private BigDecimal cost;
 

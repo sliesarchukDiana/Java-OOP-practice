@@ -2,6 +2,8 @@ package com.example.lab_8.service;
 
 import com.example.lab_8.dto.MaterialDto;
 import com.example.lab_8.mapper.MaterialMapper;
+import com.example.lab_8.model.Author;
+import com.example.lab_8.model.Keyword;
 import com.example.lab_8.model.Material;
 import com.example.lab_8.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,15 +63,20 @@ public class MaterialService {
     public MaterialDto createMaterial(MaterialDto dto) {
         Material material = materialMapper.toEntity(dto);
 
-        material.setSection(sectionRepository.findById(dto.getSectionId())
-                .orElseThrow(() -> new RuntimeException("Section not found")));
+        material.setSection(sectionRepository.getReferenceById(dto.getSectionId()));
 
         if (dto.getAuthorIds() != null) {
-            material.setAuthors(new HashSet<>(authorRepository.findAllById(dto.getAuthorIds())));
+            Set<Author> proxyAuthors = dto.getAuthorIds().stream()
+                    .map(authorRepository::getReferenceById)
+                    .collect(Collectors.toSet());
+            material.setAuthors(proxyAuthors);
         }
 
         if (dto.getKeywordIds() != null) {
-            material.setKeywords(new HashSet<>(keywordRepository.findAllById(dto.getKeywordIds())));
+            Set<Keyword> proxyKeywords = dto.getKeywordIds().stream()
+                    .map(keywordRepository::getReferenceById)
+                    .collect(Collectors.toSet());
+            material.setKeywords(proxyKeywords);
         }
 
         return materialMapper.toDto(materialRepository.save(material));
