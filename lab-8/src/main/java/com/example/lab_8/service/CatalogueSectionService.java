@@ -1,6 +1,7 @@
 package com.example.lab_8.service;
 
 import com.example.lab_8.dto.CatalogueSectionDto;
+import com.example.lab_8.exception.ResourceNotFoundException;
 import com.example.lab_8.mapper.CatalogueSectionMapper;
 import com.example.lab_8.model.CatalogueSection;
 import com.example.lab_8.repository.CatalogueSectionRepository;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CatalogueSectionService {
     private final CatalogueSectionRepository sectionRepository;
-    private final CatalogueSectionMapper sectionMapper;
+    private final CatalogueSectionMapper sectionMapper; // Використовуйте цей об'єкт
 
     @Transactional(readOnly = true)
     public List<CatalogueSectionDto> getAllSections() {
@@ -32,5 +33,11 @@ public class CatalogueSectionService {
                     .orElseThrow(() -> new RuntimeException("Parent section not found")));
         }
         return sectionMapper.toDto(sectionRepository.save(section));
+    }
+
+    public CatalogueSectionDto getSectionById(Integer id) {
+        CatalogueSection section = sectionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Розділ з ID " + id + " не знайдено"));
+        return sectionMapper.toDto(section);
     }
 }
