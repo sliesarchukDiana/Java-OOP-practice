@@ -20,6 +20,6 @@ public class ApiErrorResponse {
     private String path;
     @Schema(description = "Час виникнення помилки")
     private LocalDateTime timestamp;
-    @Schema(description = "Карта помилок валідації окремих полів (за наявності)", example = "{\"cost\": \"Enter normal price you dumdum!\"}")
+    @Schema(description = "Карта помилок валідації окремих полів (за наявності)", example = "{\"attribute\": \"Cannot be empty!\"}")
     private Map<String, String> validationErrors;
 }
