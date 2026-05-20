@@ -23,6 +23,7 @@ public class SubscriptionService {
     private final KeywordRepository keywordRepository;
     private final SubscriptionMapper subscriptionMapper;
 
+    @Transactional(readOnly = true)
     public List<SubscriptionDto> getAllSubscriptions() {
         return subscriptionRepository.findAll().stream()
                 .map(subscriptionMapper::toDto)

@@ -30,6 +30,7 @@ public class KeywordService {
         return keyword;
     }
 
+    @Transactional(readOnly = true)
     public List<KeywordDto> getAllKeywords() {
         return keywordRepository.findAll().stream()
                 .map(this::mapToDto)

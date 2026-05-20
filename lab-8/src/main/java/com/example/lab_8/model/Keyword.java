@@ -2,12 +2,14 @@ package com.example.lab_8.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Keyword")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Keyword {
 

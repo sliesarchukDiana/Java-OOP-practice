@@ -24,11 +24,7 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AuthorDto> getById(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(authorService.getAuthorById(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return ResponseEntity.ok(authorService.getAuthorById(id));
     }
 
     @PostMapping
@@ -48,12 +44,8 @@ public class AuthorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        try {
-            authorService.deleteAuthor(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        authorService.deleteAuthor(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/full-name")

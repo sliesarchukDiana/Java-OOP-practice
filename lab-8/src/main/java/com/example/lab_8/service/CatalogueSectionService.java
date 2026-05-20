@@ -17,6 +17,7 @@ public class CatalogueSectionService {
     private final CatalogueSectionRepository sectionRepository;
     private final CatalogueSectionMapper sectionMapper;
 
+    @Transactional(readOnly = true)
     public List<CatalogueSectionDto> getAllSections() {
         return sectionRepository.findAll().stream()
                 .map(sectionMapper::toDto)

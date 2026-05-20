@@ -24,6 +24,7 @@ public class MaterialService {
     private final CatalogueSectionRepository sectionRepository;
     private final MaterialMapper materialMapper;
 
+    @Transactional(readOnly = true)
     public List<MaterialDto> getAllMaterials() {
         return materialRepository.findAll().stream()
                 .map(materialMapper::toDto)

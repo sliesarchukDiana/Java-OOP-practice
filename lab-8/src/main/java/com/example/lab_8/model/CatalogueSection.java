@@ -3,13 +3,16 @@ package com.example.lab_8.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
 @Entity
 @Table(name = "Catalogue_section")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class CatalogueSection {
 

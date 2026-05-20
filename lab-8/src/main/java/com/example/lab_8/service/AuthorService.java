@@ -1,6 +1,7 @@
 package com.example.lab_8.service;
 
 import com.example.lab_8.dto.AuthorDto;
+import com.example.lab_8.exception.ResourceNotFoundException;
 import com.example.lab_8.mapper.AuthorMapper;
 import com.example.lab_8.model.Author;
 import com.example.lab_8.repository.AuthorJdbcRepository;
@@ -20,16 +21,18 @@ public class AuthorService {
     private final AuthorMapper authorMapper;
     private final AuthorJdbcRepository authorJdbcRepository;
 
+    @Transactional(readOnly = true)
     public List<AuthorDto> getAllAuthors() {
         return authorRepository.findAll().stream()
                 .map(authorMapper::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public AuthorDto getAuthorById(Integer id) {
         return authorRepository.findById(id)
                 .map(authorMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Author not found with id: " + id));
     }
 
     @Transactional

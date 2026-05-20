@@ -17,12 +17,14 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
+    @Transactional(readOnly = true)
     public List<ClientDto> getAllClients() {
         return clientRepository.findAll().stream()
                 .map(clientMapper::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public ClientDto getClientById(Integer id) {
         return clientRepository.findById(id)
                 .map(clientMapper::toDto)
