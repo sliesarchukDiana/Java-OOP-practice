@@ -4,9 +4,12 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Collections;
 
 @Configuration
 public class OpenApiConfig {
@@ -19,7 +22,8 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("API для управління авторами, клієнтами, матеріалами (статтями) та підписками.\n\n**Зв'язок з розробником:** sliesarchuk.diana@chnu.edu.ua")
                         .contact(new Contact().name("Diana Sliesarchuk").url("https://github.com/sliesarchukDiana"))
-                        .license(new License().name("Apache 2.0").url("https://springdoc.org")));
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")))
+                        .servers(Collections.singletonList(new Server().url("/").description("Base URL")));
     }
 
     @Bean
