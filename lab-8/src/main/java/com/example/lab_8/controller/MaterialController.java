@@ -21,29 +21,47 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/materials")
 @RequiredArgsConstructor
-@Tag(name = "Матеріали", description = "Ендпоінти для створення, пагінації та управління навчальними матеріалами")
+@Tag(name = "Матеріали", description = "Управління матеріалами та публікаціями")
 public class MaterialController {
 
     private final MaterialService materialService;
 
     @GetMapping
-    @Operation(summary = "Отримати матеріали з пагінацією", description = "Повертає сторінку матеріалів відповідно до параметрів page, size та sort")
+    @Operation(
+            summary = "Отримати список матеріалів з пагінацією",
+            description = "Дозволяє завантажувати матеріали сторінками із можливістю сортування. Запобігає перевантаженню пам'яті."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Сторінку з матеріалами успішно отримано")
+    })
     public ResponseEntity<Page<MaterialDto>> getMaterialsPaginated(
-            @Parameter(description = "Параметри пагінації (напр. page=0&size=10)") Pageable pageable) {
+            @Parameter(
+                    description = "Параметри пагінації та сортування (наприклад: ?page=0&size=10&sort=cost,desc)",
+                    example = "{\"page\": 0, \"size\": 10}"
+            ) Pageable pageable) {
         return ResponseEntity.ok(materialService.getMaterialsPaginated(pageable));
     }
 
     @PostMapping
-    @Operation(summary = "Створити новий матеріал", description = "Приймає дані матеріалу, валідує їх та прив'язує до сутностей через проксі-об'єкти")
+    @Operation(
+            summary = "Створити новий матеріал",
+            description = "Валідує вхідний JSON та створює запис матеріалу, зв'язуючи його з розділом, авторами та тегами за допомогою Hibernate."
+    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Матеріал успішно створено",
-                    content = @Content(schema = @Schema(implementation = MaterialDto.class))),
-            @ApiResponse(responseCode = "400", description = "Некоректні вхідні дані (помилка валідації)",
-                    content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
-            @ApiResponse(responseCode = "409", description = "Конфлікт у базі даних (наприклад, вказано неіснуючий sectionId)",
-                    content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
+            @ApiResponse(
+                    responseCode = "201", description = "Матеріал успішно створено у каталозі",
+                    content = @Content(schema = @Schema(implementation = MaterialDto.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400", description = "Помилка валідації полів (наприклад, від'ємна вартість або порожня назва)",
+                    content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "409", description = "Конфлікт цілісності даних (вказано неіснуючий ідентифікатор розділу чи автора)",
+                    content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))
+            )
     })
     public ResponseEntity<MaterialDto> createMaterial(@Valid @RequestBody MaterialDto materialDto) {
-        return ResponseEntity.ok(materialService.createMaterial(materialDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(materialService.createMaterial(materialDto));
     }
 }

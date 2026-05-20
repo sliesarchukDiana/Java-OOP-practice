@@ -6,40 +6,41 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Data
-@Schema(description = "Модель для передачі та створення навчального матеріалу")
+@Schema(description = "Модель для передачі даних матеріалу (статті)")
 public class MaterialDto {
 
-    @Schema(description = "Унікальний ідентифікатор матеріалу", example = "12", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Унікальний ідентифікатор матеріалу", example = "101", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer id;
 
     @NotBlank(message = "Title cannot be empty")
-    @Size(max = 255, message = "Toooo long")
-    @Schema(description = "Назва матеріалу", example = "Глибоке занурення в Spring Data JPA", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Size(max = 255, message = "Title is too long")
+    @Schema(description = "Назва матеріалу", example = "Введення у Spring Boot та REST API", requiredMode = Schema.RequiredMode.REQUIRED)
     private String title;
 
     @Size(max = 500, message = "Only 500 symbols, too long!")
-    @Schema(description = "Короткий опис або анотація", example = "Детальний розбір роботи Hibernate, проксі-об'єктів та оптимізації SQL-запитів")
+    @Schema(description = "Коротка анотація або опис змісту статті", example = "Базові концепції створення веб-додатків на Spring Boot, налаштування контролерів та обробка HTTP-запитів.")
     private String annotation;
 
-    @Schema(description = "Повний текст матеріалу", example = "Тут знаходиться дуже розумний текст лекції...")
+    @Schema(description = "Повний текстовий вміст матеріалу", example = "Тут знаходиться детальний текст...")
     private String bodyText;
 
     @NotNull(message = "Cost is required")
-    @PositiveOrZero(message = "Enter normal price you dumdum!")
-    @Schema(description = "Вартість доступу до матеріалу (0 - безкоштовно)", example = "250.00", requiredMode = Schema.RequiredMode.REQUIRED)
+    @PositiveOrZero(message = "Price cannot be negative!")
+    @Schema(description = "Вартість доступу до матеріалу (0.00 означає, що матеріал безкоштовний)", example = "150.00", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal cost;
 
     @NotNull(message = "Material must belong to some section!")
-    @Schema(description = "ID розділу каталогу, до якого належить матеріал", example = "3", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Ідентифікатор розділу каталогу, до якого належить цей матеріал", example = "2", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer sectionId;
 
-    @Schema(description = "Список ID авторів матеріалу", example = "[1, 4]")
+    @Schema(description = "Набір ідентифікаторів авторів, які створили цей матеріал", example = "[1, 3]")
     private Set<Integer> authorIds;
 
-    @Schema(description = "Список ID ключових слів (тегів)", example = "[2, 5, 11]")
+    @Schema(description = "Набір ідентифікаторів ключових слів (тегів) для пошуку", example = "[5, 8, 12]")
     private Set<Integer> keywordIds;
 }
