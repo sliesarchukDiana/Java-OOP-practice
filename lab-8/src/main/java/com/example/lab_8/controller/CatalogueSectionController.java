@@ -5,6 +5,7 @@ import com.example.lab_8.exception.ApiErrorResponse;
 import com.example.lab_8.service.CatalogueSectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,16 +29,21 @@ public class CatalogueSectionController {
 
     @GetMapping
     @Operation(summary = "Отримати всі розділи", description = "Повертає список усіх доступних розділів каталогу")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список розділів успішно отримано",
+                    content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CatalogueSectionDto.class))))
+    })
     public ResponseEntity<List<CatalogueSectionDto>> getAll() {
         return ResponseEntity.ok(sectionService.getAllSections());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Знайти розділ за ID")
+    @Operation(summary = "Знайти розділ за ID", description = "Шукає та повертає інформацію про конкретний розділ за його ідентифікатором")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Розділ знайдено"),
+            @ApiResponse(responseCode = "200", description = "Розділ знайдено",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CatalogueSectionDto.class))),
             @ApiResponse(responseCode = "404", description = "Розділ не знайдено",
-                    content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     public ResponseEntity<CatalogueSectionDto> getById(
             @Parameter(description = "ID розділу", example = "1") @PathVariable Integer id) {
@@ -47,11 +53,12 @@ public class CatalogueSectionController {
     @PostMapping
     @Operation(summary = "Створити розділ", description = "Додає новий розділ до каталогу")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Розділ успішно створено"),
-            @ApiResponse(responseCode = "400", description = "Помилка валідації")
+            @ApiResponse(responseCode = "201", description = "Розділ успішно створено",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CatalogueSectionDto.class))),
+            @ApiResponse(responseCode = "400", description = "Помилка валідації",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     public ResponseEntity<CatalogueSectionDto> create(@Valid @RequestBody CatalogueSectionDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(sectionService.createSection(dto));
     }
-    
 }

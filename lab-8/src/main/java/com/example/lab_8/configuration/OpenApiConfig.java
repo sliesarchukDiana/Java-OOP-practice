@@ -20,10 +20,15 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Інтернет-розсилка API")
                         .version("1.0")
-                        .description("API для управління авторами, клієнтами, матеріалами (статтями) та підписками.\n\n**Зв'язок з розробником:** sliesarchuk.diana@chnu.edu.ua")
-                        .contact(new Contact().name("Diana Sliesarchuk").url("https://github.com/sliesarchukDiana"))
-                        .license(new License().name("Apache 2.0").url("https://springdoc.org")))
-                        .servers(Collections.singletonList(new Server().url("/").description("Base URL")));
+                        .description("API для управління авторами, клієнтами, матеріалами (статтями) та підписками.")
+                        .contact(new Contact()
+                                .name("Diana Sliesarchuk")
+                                .email("sliesarchuk.diana@chnu.edu.ua")
+                                .url("https://github.com/sliesarchukDiana"))
+                        .license(new License()
+                                .name("Apache 2.0")
+                                .url("https://springdoc.org")))
+                .servers(Collections.singletonList(new Server().url("/").description("Base URL")));
     }
 
     @Bean

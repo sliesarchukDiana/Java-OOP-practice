@@ -32,7 +32,11 @@ public class MaterialController {
             description = "Дозволяє завантажувати матеріали сторінками із можливістю сортування. Запобігає перевантаженню пам'яті."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Сторінку з матеріалами успішно отримано")
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Сторінку з матеріалами успішно отримано",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MaterialDto.class))
+            )
     })
     public ResponseEntity<Page<MaterialDto>> getMaterialsPaginated(
             @Parameter(

@@ -3,29 +3,25 @@ package com.example.lab_8.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-@Schema(description = "Базова модель користувача системи (успадковується авторами та клієнтами)")
+@Schema(description = "Базова модель профілю особи")
 public class PersonDto {
 
-    @Schema(description = "Унікальний ідентифікатор", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Унікальний числовий ідентифікатор особи", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer id;
 
-    @NotBlank(message = "First name cannot be empty")
-    @Size(max = 100, message = "The name is too long")
-    @Schema(description = "Ім'я", example = "Раян", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "First name cannot be blank")
+    @Schema(description = "Ім'я особи", example = "Раян")
     private String firstName;
 
-    @NotBlank(message = "Last name cannot be empty")
-    @Size(max = 45, message = "Too long for the last name!")
-    @Schema(description = "Прізвище", example = "Рейнольдс", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "Last name cannot be blank")
+    @Schema(description = "Прізвище особи", example = "Рейнольдс")
     private String lastName;
 
-    @NotBlank(message = "Email cannot be empty")
-    @Email(message = "Incorrect email format")
-    @Size(max = 100, message = "Email is too long")
-    @Schema(description = "Контактна електронна адреса", example = "rian.reynolds@gmail.com", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email cannot be blank")
+    @Schema(description = "Електронна адреса", example = "ryan.reynolds@example.com")
     private String email;
 }
