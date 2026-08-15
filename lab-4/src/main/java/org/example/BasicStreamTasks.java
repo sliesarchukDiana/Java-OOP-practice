@@ -7,16 +7,21 @@ import java.util.stream.Collectors;
 
 public class BasicStreamTasks {
     public static Optional<String> findStringWithX(List<String> strings) {
-        return strings.stream().filter(s -> s.startsWith("X") && s.length() > 5).findFirst().or(() -> Optional.of("Default"));
+        return strings.stream()
+                .filter(s -> s.startsWith("X") && s.length() > 5)
+                .findFirst().or(() -> Optional.of("Default"));
     }
 
     public static List<Integer> unwrapOptionals(List<Optional<Integer>> optionals) {
-        return optionals.stream().flatMap(Optional::stream).collect(Collectors.toList());
+        return optionals.stream()
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
     }
 
 
     public static Optional<String> findLongestName(List<String> names) {
-        return names.stream().max(Comparator.comparingInt(String::length));
+        return names.stream()
+                .max(Comparator.comparingInt(String::length));
     }
 
     static void main() {
